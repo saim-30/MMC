@@ -14,3 +14,5 @@ ORG 0300H           ; Lookup table for 7-segment display (0–9)
 DB 3FH, 06H, 5BH, 4FH, 66H, 6DH, 7DH, 07H, 7FH, 6FH
 
 END
+
+port 1 and port 2
