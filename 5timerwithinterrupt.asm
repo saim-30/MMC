@@ -1,3 +1,5 @@
+with interrupts
+
 ORG 0000H
 LJMP MAIN          ; Jump to main program
 
@@ -18,3 +20,4 @@ MAIN:
 
 HERE: SJMP HERE    ; Infinite loop
 END
+
