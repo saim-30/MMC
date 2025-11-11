@@ -1,7 +1,18 @@
 ORG 0000H
-	LUT : DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH,6FH
-	MOV DPTR,#LUT
-	MOV A,50H
-	MOVC A,@A+DPTR
-	MOV 60H,A
-	END
+
+MOV TMOD, #10H       ; Timer1 in Mode 1 (16-bit timer)
+
+AGAIN: 
+    MOV TL1, #0FFH    ; Load low byte of Timer1
+    MOV TH1, #0EDH    ; Load high byte of Timer1
+    CPL P1.5          ; Toggle pin P1.5
+    SETB TR1          ; Start Timer1
+
+BACK: 
+    JNB TF1, BACK     ; Wait until Timer1 overflows (TF1 = 1)
+
+    CLR TR1           ; Stop Timer1
+    CLR TF1           ; Clear overflow flag
+    SJMP AGAIN        ; Repeat forever
+
+END
